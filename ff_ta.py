@@ -25,7 +25,7 @@ CLASSES = {
 def verifyclass(classstr,f):
 	vv = 0
 	if classstr == 'Animist':
-		if ((rv[f+4])%100)>9 and ((rv[f+5])%90)>9 and ((rv[f+6])%80)>9 and ((rv[f+7])%70)>13 and ((rv[f+8])%56)>13 and ((rv[f+9])%42)>13 and ((rv[f+9])%28)>13 and ((rv[f+9])%14)>13:
+		if ((rv[f+4])%100)>9 and ((rv[f+5])%90)>9 and ((rv[f+6])%80)>9 and ((rv[f+7])%70)>13 and ((rv[f+8])%56)>13 and ((rv[f+9])%42)>13 and ((rv[f+9])%28)>13 and ((rv[f+9])%14)<14:
 			vv = 1
 	elif classstr == 'Morpher':
 		if ((rv[f+4])%100)>9 and ((rv[f+5])%90)>9 and ((rv[f+6])%80)>9 and ((rv[f+7])%70)>13 and ((rv[f+8])%56)<14:
