@@ -51,9 +51,11 @@ def main():
 	print "   0 - Animist\n   1 - Morpher\n   2 - Assassin\n   3 - Ninja\n"
 	cv = int(raw_input("Class = "))
 	
-	print "Please Enter The Minimum Desired NetGain"
+	print "\nPlease Enter The Minimum Desired NetGain"
 	netgain = int(raw_input("NetGain = "))
-	print "\n"
+	
+	print "\nSearch how many frames forward?"
+	srange = int(raw_input("Frames = ").replace(',', ''))
 	
 	# Prepare Variables
 	cm = CLASSMV.get(cv)
@@ -66,13 +68,13 @@ def main():
 	# Populate Random Values, keep Tables
 	global rv 
 	global rs
-	(rv,rs) = populate(seed)
+	(rv,rs) = populate(seed,srange+500)
 	
 	# Offset from Frame # to start Stat Calls
 	o = cm[7]	
 	
 	# Loop For Results
-	for f in range(1,100000):
+	for f in range(1,srange):
 		if verifyclass(classstr,f) == 1:
 			hpv = ( rv[f+o+2+4*0]%cm[0] + rv[f+o+3+4*0]%cm[0] - rv[f+o+0+4*0]%cm[0] - rv[f+o+1+4*0]%cm[0] )/2
 			mpv = 0
@@ -83,7 +85,7 @@ def main():
 			spv = ( rv[f+o+2+4*6]%cm[6] + rv[f+o+3+4*6]%cm[6] - rv[f+o+0+4*6]%cm[6] - rv[f+o+1+4*6]%cm[6] )/2
 			rawgain = hpv+mpv+atv+dev+mav+rev+spv
 			if rawgain >= netgain:
-				string = "%08X - %s - %d | HP: %2d | MP: %2d | AT: %2d | DF: %2d | MA: %2d | RE: %2d | SP: %2d" % (rs[f],classstr,rawgain,hpv,mpv,atv,dev,mav,rev,spv)
+				string = "%d - %08X - %s - %d | HP: %2d | MP: %2d | AT: %2d | DF: %2d | MA: %2d | RE: %2d | SP: %2d" % (f,rs[f],classstr,rawgain,hpv,mpv,atv,dev,mav,rev,spv)
 				print string
 				text_file.write(string + '\n')
 		
@@ -104,10 +106,10 @@ def randf(seed):
 # **************************************************** #
 	
 # Populate frame list
-def populate(seed):	
+def populate(seed,srange):	
 	cseed = seed
 	rv,rs = [seed],[seed]
-	for frame in range(100500):
+	for frame in range(srange):
 		cseed = randf(cseed)
 		rv.append((cseed>>16)&0x7FFF)
 		rs.append(cseed)
