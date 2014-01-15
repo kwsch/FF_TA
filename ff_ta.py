@@ -1,8 +1,4 @@
-# FFTA Generator
-
-
-
-
+# FF_TA Generator By Kaphotics
 
 # **************************************************** #
 
@@ -22,25 +18,28 @@ CLASSES = {
 	3: 'Ninja',
 	}
 	
+# **************************************************** #
+
+# Class Verification
+	
 def verifyclass(classstr,f):
 	vv = 0
 	if classstr == 'Animist':
-		if ((rv[f+4])%100)>9 and ((rv[f+5])%90)>9 and ((rv[f+6])%80)>9 and ((rv[f+7])%70)>13 and ((rv[f+8])%56)>13 and ((rv[f+9])%42)>13 and ((rv[f+9])%28)>13 and ((rv[f+9])%14)<14:
+		if ((rv[f+1])%100)>9 and ((rv[f+2])%90)>9 and ((rv[f+3])%80)>9 and ((rv[f+4])%70)>13 and ((rv[f+5])%56)>13 and ((rv[f+6])%42)>13 and ((rv[f+7])%28)>13 and ((rv[f+8])%14)<14:
 			vv = 1
 	elif classstr == 'Morpher':
-		if ((rv[f+4])%100)>9 and ((rv[f+5])%90)>9 and ((rv[f+6])%80)>9 and ((rv[f+7])%70)>13 and ((rv[f+8])%56)<14:
+		if ((rv[f+1])%100)>9 and ((rv[f+2])%90)>9 and ((rv[f+3])%80)>9 and ((rv[f+4])%70)>13 and ((rv[f+5])%56)<14:
 			vv = 1
 	elif classstr == 'Assassin':
-		if ((rv[f+4])%100)>9 and ((rv[f+5])%90)<10:
+		if ((rv[f+1])%100)>9 and ((rv[f+2])%90)<10:
 			vv = 1
 	elif classstr == 'Ninja':
-		if ((rv[f+4])%100)>9 and ((rv[f+5])%92)<8:
+		if ((rv[f+1])%100)>7 and ((rv[f+2])%92)<8:
 			vv = 1
 	else:
 		raw_input('Bad ClassSTR')
-	
 	return vv
-	
+
 # **************************************************** #
 
 def main():
@@ -64,12 +63,13 @@ def main():
 	global text_file 
 	text_file = open("FFTA %08X @ %s.txt" % (seed,classstr), "w")
 
-	# Populate Random Values
+	# Populate Random Values, keep Tables
 	global rv 
 	global rs
 	(rv,rs) = populate(seed)
 	
-	o = cm[7]	# Offset from Frame # to start Stat Calls
+	# Offset from Frame # to start Stat Calls
+	o = cm[7]	
 	
 	# Loop For Results
 	for f in range(1,100000):
@@ -119,10 +119,8 @@ def populate(seed):
 go=1
 while go==1:
 	main()
-	print ""
-	if raw_input("Results exported.\nSearch Another? (y/n): ") != "y":
+	if raw_input("\nResults exported.\nSearch Another? (y/n): ") != "y":
 		go=0
 
 # Notify For Completion
-print ""
-raw_input("Done. Press Enter to Exit.")
+raw_input("\nDone. Press Enter to Exit.")
