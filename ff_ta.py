@@ -134,11 +134,11 @@ def populate(seed,srange):
 go=1
 while go==1:
 	(seed,cv,netgain,srange)=getinput()
-	original_range,rf = srange,0
+	original_range,rf = (srange-1),0
 	while srange > 1000000: # If Searching more than 1 million
 		operate(seed,cv,netgain,1000001,rf)	# Operate for Only a million, then return
 		seed = rs[1000000]
-		srange -= 1000001
+		srange -= 1000000
 		rf += 1000000
 		print "%d - Looping!" % rf
 		

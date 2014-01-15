@@ -1,0 +1,10 @@
+8928729 - 3DD96187 - Assassin - 27 | HP:  0 | MP:  0 | AT:  5 | DF:  3 | MA:  7 | RE:  3 | SP:  9
+50116251 - C1C3CA1D - Assassin - 28 | HP:  0 | MP:  0 | AT:  5 | DF:  4 | MA:  7 | RE:  5 | SP:  7
+76397459 - C52F1665 - Assassin - 28 | HP:  2 | MP:  0 | AT:  7 | DF:  3 | MA:  4 | RE:  1 | SP: 11
+78267468 - 3590CA22 - Assassin - 29 | HP:  2 | MP:  0 | AT:  4 | DF:  3 | MA:  4 | RE:  5 | SP: 11
+303270901 - 86ACF78B - Assassin - 27 | HP:  0 | MP:  0 | AT:  5 | DF:  3 | MA:  6 | RE:  3 | SP: 10
+309131390 - 19560200 - Assassin - 27 | HP:  1 | MP:  0 | AT:  6 | DF:  4 | MA:  4 | RE:  2 | SP: 10
+309167720 - AFB371F6 - Assassin - 27 | HP:  1 | MP:  0 | AT:  4 | DF:  3 | MA:  5 | RE:  3 | SP: 11
+412019946 - 4533A3E4 - Assassin - 27 | HP:  1 | MP:  0 | AT:  5 | DF:  5 | MA:  7 | RE:  4 | SP:  5
+433174046 - 631980E0 - Assassin - 27 | HP:  1 | MP:  0 | AT:  3 | DF:  5 | MA:  6 | RE:  5 | SP:  7
+441655274 - 2733FCE4 - Assassin - 28 | HP:  1 | MP:  0 | AT:  6 | DF:  3 | MA:  4 | RE:  3 | SP: 11
