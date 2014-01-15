@@ -42,7 +42,7 @@ def verifyclass(classstr,f):
 
 # **************************************************** #
 
-def main():
+def getinput():
 	# Obtain Input Data:
 	print "Please Enter your Current Seed in 8 Hex Digit format:"
 	seed = int(raw_input(" \-> Seed = 0x"),16)
@@ -57,13 +57,20 @@ def main():
 	print "\nSearch how many frames forward?"
 	srange = int(raw_input("Frames = ").replace(',', ''))+1
 	
-	# Prepare Variables
+	global cm
+	global classstr
 	cm = CLASSMV.get(cv)
 	classstr = CLASSES.get(cv)
 	
-	# Prepare Text File for Output
 	global text_file 
 	text_file = open("FFTA %08X @ %s %d.txt" % (seed,classstr,netgain), "w")
+	return (seed,cv,netgain,srange)
+	
+
+def operate(seed,cv,netgain,srange,rf):
+	# Prepare Variables
+	
+	# Prepare Text File for Output
 
 	# Populate Random Values, keep Tables
 	global rv 
@@ -75,7 +82,11 @@ def main():
 	
 	# Loop For Results
 	for f in range(1,srange):
+	
+		global finalseed
 		finalf = f
+		finalseed = rs[f]
+		
 		if verifyclass(classstr,f) == 1:
 			hpv = ( rv[f+o+2+4*0]%cm[0] + rv[f+o+3+4*0]%cm[0] - rv[f+o+0+4*0]%cm[0] - rv[f+o+1+4*0]%cm[0] )/2
 			mpv = 0
@@ -86,13 +97,12 @@ def main():
 			spv = ( rv[f+o+2+4*6]%cm[6] + rv[f+o+3+4*6]%cm[6] - rv[f+o+0+4*6]%cm[6] - rv[f+o+1+4*6]%cm[6] )/2
 			rawgain = hpv+mpv+atv+dev+mav+rev+spv
 			if rawgain >= netgain:
-				string = "%d - %08X - %s - %d | HP: %2d | MP: %2d | AT: %2d | DF: %2d | MA: %2d | RE: %2d | SP: %2d" % (f,rs[f],classstr,rawgain,hpv,mpv,atv,dev,mav,rev,spv)
+				string = "%d - %08X - %s - %d | HP: %2d | MP: %2d | AT: %2d | DF: %2d | MA: %2d | RE: %2d | SP: %2d" % (f+rf,rs[f],classstr,rawgain,hpv,mpv,atv,dev,mav,rev,spv)
 				print string
 				text_file.write(string + '\n')
 		
-	# Close Text File
-	text_file.close()
-	print "Final PRNG Value: %08x @ %d frames." % (rs[f],finalf)
+
+	
 	return
 
 # **************************************************** #	
@@ -111,6 +121,7 @@ def randf(seed):
 def populate(seed,srange):	
 	cseed = seed
 	rv,rs = [seed],[seed]
+	srange = srange+50
 	for frame in range(srange):
 		cseed = randf(cseed)
 		rv.append((cseed>>16)&0x7FFF)
@@ -122,7 +133,20 @@ def populate(seed,srange):
 # Execute Script:
 go=1
 while go==1:
-	main()
+	(seed,cv,netgain,srange)=getinput()
+	original_range,rf = srange,0
+	while srange > 1000000: # If Searching more than 1 million
+		operate(seed,cv,netgain,1000001,rf)	# Operate for Only a million, then return
+		seed = rs[1000000]
+		srange -= 1000001
+		rf += 1000000
+		print "%d - Looping!" % rf
+		
+	operate(seed,cv,netgain,srange,rf)
+	finalseed = rs[srange]
+	
+	print "Final Seed: %08X | Frames Iterated: %d" % (finalseed,original_range)
+	text_file.close()
 	if raw_input("\nResults exported.\nSearch Another? (y/n): ") != "y":
 		go=0
 
