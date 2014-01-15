@@ -55,7 +55,7 @@ def main():
 	netgain = int(raw_input("NetGain = "))
 	
 	print "\nSearch how many frames forward?"
-	srange = int(raw_input("Frames = ").replace(',', ''))
+	srange = int(raw_input("Frames = ").replace(',', ''))+1
 	
 	# Prepare Variables
 	cm = CLASSMV.get(cv)
@@ -63,7 +63,7 @@ def main():
 	
 	# Prepare Text File for Output
 	global text_file 
-	text_file = open("FFTA %08X @ %s.txt" % (seed,classstr), "w")
+	text_file = open("FFTA %08X @ %s %d.txt" % (seed,classstr,netgain), "w")
 
 	# Populate Random Values, keep Tables
 	global rv 
@@ -75,6 +75,7 @@ def main():
 	
 	# Loop For Results
 	for f in range(1,srange):
+		finalf = f
 		if verifyclass(classstr,f) == 1:
 			hpv = ( rv[f+o+2+4*0]%cm[0] + rv[f+o+3+4*0]%cm[0] - rv[f+o+0+4*0]%cm[0] - rv[f+o+1+4*0]%cm[0] )/2
 			mpv = 0
@@ -91,6 +92,7 @@ def main():
 		
 	# Close Text File
 	text_file.close()
+	print "Final PRNG Value: %08x @ %d frames." % (rs[f],finalf)
 	return
 
 # **************************************************** #	
