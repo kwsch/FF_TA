@@ -83,7 +83,7 @@ def main():
 			spv = ( rv[f+o+2+4*6]%cm[6] + rv[f+o+3+4*6]%cm[6] - rv[f+o+0+4*6]%cm[6] - rv[f+o+1+4*6]%cm[6] )/2
 			rawgain = hpv+mpv+atv+dev+mav+rev+spv
 			if rawgain >= netgain:
-				string = "%08X - %s - %d | HP: %2d | MP: %2d | AT: %2d | DF: %2d | MA: %2d | RE: %2d | SP: %2d" % (rs[f-1],classstr,rawgain,hpv,mpv,atv,dev,mav,rev,spv)
+				string = "%08X - %s - %d | HP: %2d | MP: %2d | AT: %2d | DF: %2d | MA: %2d | RE: %2d | SP: %2d" % (rs[f],classstr,rawgain,hpv,mpv,atv,dev,mav,rev,spv)
 				print string
 				text_file.write(string + '\n')
 		
